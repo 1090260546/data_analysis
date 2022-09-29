@@ -1,0 +1,15 @@
+import React, { FC } from 'react'
+import styles from './Container.less'
+
+interface IContainerProps {
+  children: React.ReactNode
+}
+
+const Container: FC<IContainerProps> = ({ children }) => {
+  return <div className={styles.container}>{children}</div>
+}
+
+export default Container
+
+export { default as ContainerTitle } from './Title'
+export { default as ContainerBody } from './Body'

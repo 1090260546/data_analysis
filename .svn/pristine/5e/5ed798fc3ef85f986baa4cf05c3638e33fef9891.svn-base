@@ -1,0 +1,33 @@
+2022-09-06 15:43:15.138 --- ExecutorUtils.java:79 : WORKBOOK_WORKERS keep alive time:60, poolSize:0, waiting queue size:0, task count:0, completed task size:0
+2022-09-06 15:43:15.138 --- WorkbookWorker.java:82 : Task(DownloadTask_1) workbook worker start action=DOWNLOAD, xid=1
+2022-09-06 15:43:15.544 --- ExecutorUtils.java:79 : SHEET_WORKERS keep alive time:60, poolSize:0, waiting queue size:0, task count:0, completed task size:0
+2022-09-06 15:43:15.547 --- ExecutorUtils.java:79 : SHEET_WORKERS keep alive time:60, poolSize:1, waiting queue size:0, task count:1, completed task size:0
+2022-09-06 15:43:15.548 --- ExecutorUtils.java:79 : SHEET_WORKERS keep alive time:60, poolSize:2, waiting queue size:0, task count:2, completed task size:0
+2022-09-06 15:43:15.696 --- SheetWorker.java:91 : Task(DownloadTask_1) sheet worker(name:char3, sheetNo:3, sheetName:3-char3) query start sql:SELECT `user_tag`, sum(`id`) AS "sum(id)"
+FROM (
+	SELECT *
+	FROM ob_task_user_tag
+	WHERE task_id = 727
+) T
+GROUP BY `user_tag`, md5:66E3C662928BC368
+2022-09-06 15:43:15.696 --- SheetWorker.java:91 : Task(DownloadTask_1) sheet worker(name:char1, sheetNo:1, sheetName:1-char1) query start sql:SELECT `user_tag`, sum(`id`) AS "sum(id)"
+FROM (
+	SELECT *
+	FROM ob_task_user_tag
+	WHERE task_id = 727
+) T
+GROUP BY `user_tag`, md5:66E3C662928BC368
+2022-09-06 15:43:15.696 --- SheetWorker.java:91 : Task(DownloadTask_1) sheet worker(name:char2, sheetNo:2, sheetName:2-char2) query start sql:SELECT `category`, `user_tag`, sum(`id`) AS "sum(id)"
+FROM (
+	SELECT *
+	FROM ob_task_user_tag
+	WHERE task_id = 727
+) T
+GROUP BY `category`, `user_tag`, md5:9051F84A59B538DC
+2022-09-06 15:43:15.730 --- SheetWorker.java:109 : Task(DownloadTask_1) sheet worker(name:char3, sheetNo:3, sheetName:3-char3) query finish md5:66E3C662928BC368, count:14
+2022-09-06 15:43:15.755 --- SheetWorker.java:109 : Task(DownloadTask_1) sheet worker(name:char1, sheetNo:1, sheetName:1-char1) query finish md5:66E3C662928BC368, count:14
+2022-09-06 15:43:15.755 --- SheetWorker.java:109 : Task(DownloadTask_1) sheet worker(name:char2, sheetNo:2, sheetName:2-char2) query finish md5:9051F84A59B538DC, count:14
+2022-09-06 15:43:15.923 --- SheetWorker.java:133 : Task(DownloadTask_1) sheet worker(char3) complete md5=66E3C662928BC368, status=true, action=DOWNLOAD, xid=1, xUUID=null, sheetNo=3, sheetName=3-char3, dashboardId=1, widgetId=3, cost=374ms
+2022-09-06 15:43:15.923 --- SheetWorker.java:133 : Task(DownloadTask_1) sheet worker(char1) complete md5=66E3C662928BC368, status=true, action=DOWNLOAD, xid=1, xUUID=null, sheetNo=1, sheetName=1-char1, dashboardId=1, widgetId=1, cost=378ms
+2022-09-06 15:43:15.924 --- SheetWorker.java:133 : Task(DownloadTask_1) sheet worker(char2) complete md5=9051F84A59B538DC, status=true, action=DOWNLOAD, xid=1, xUUID=null, sheetNo=2, sheetName=2-char2, dashboardId=1, widgetId=2, cost=376ms
+2022-09-06 15:43:16.097 --- WorkbookWorker.java:181 : Task(DownloadTask_1) workbook worker complete status=true, action=DOWNLOAD, xid=1, filePath=D:\Program Files\IdeaProjects\Davinci-dev-0.3\userfiles\download\20220906\excel\1_1662450195927.xlsx, cost=957ms

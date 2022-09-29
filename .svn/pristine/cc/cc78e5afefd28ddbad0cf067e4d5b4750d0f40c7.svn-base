@@ -1,0 +1,5 @@
+export { default as RichText } from './Editor'
+export { parseHtml } from './util'
+export { TextStyles } from './Element'
+export { Node as RichTextNode } from 'slate'
+export { getDefaultContent } from './util'

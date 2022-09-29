@@ -1,0 +1,6 @@
+:global {
+  .display-slide-layer-content {
+    height: 100%;
+    width: 100%;
+  }
+}

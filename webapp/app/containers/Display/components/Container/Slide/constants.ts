@@ -1,0 +1,5 @@
+export const DISPLAY_CONTAINER_PADDING = 64
+
+export const DEFAULT_BASELINE_DIVISIONS = [4, 3, 2]
+export const DEFAULT_BASELINE_THICKNESS = 1.5
+export const DEFAULT_BASELINE_COLOR = '#ecc302'

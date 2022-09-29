@@ -1,0 +1,21 @@
+:global {
+  .display {
+    &-layer-align {
+      display: flex;
+      flex-direction: column;
+      margin: 8px;
+
+      &-category {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 8px;
+
+        i + i {
+          margin-left: 16px;
+        }
+      }
+    }
+  }
+}

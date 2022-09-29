@@ -1,0 +1,43 @@
+@import "~assets/less/variable";
+
+.thumbnails {
+  user-select: none;
+
+  li {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+  }
+}
+
+.thumbnail {
+  border: @border-width-base @border-style-base @border-color-base;
+  background-size: cover;
+  padding-bottom: %(~"%a%", (3 / 4 * 100));
+  position: relative;
+}
+
+.cover {
+  position: absolute;
+}
+
+.current {
+  background-color: @primary-3;
+}
+
+.selected {
+  border: @border-width-base * 2 @border-style-base @primary-color;
+}
+
+.serial {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-right: 8px;
+  min-width: 26px;
+}
+
+.content {
+  flex: 1;
+  width: 100%;
+}

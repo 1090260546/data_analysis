@@ -1,0 +1,60 @@
+@import '~antd/lib/style/themes/default';
+
+:global {
+  .richtext {
+    &-toolbar {
+      padding: 0 8px;
+      border-bottom: @border-width-base @border-style-base @border-color-base;
+      user-select: none; // to avoid editor selection lost while clicking the toolbar item
+
+      .anticon {
+        font-size: 16px;
+      }
+
+      .anticon + .anticon {
+        margin-left: 8px;
+      }
+
+      &-select, .ant-select-sm, .ant-select, .ant-select-enabled {
+        width: auto;
+        margin: 4px 8px 4px 0;
+
+        h1, h2, h3, h4, h5, h6 {
+          font-size: 14px;
+          font-weight: normal;
+        }
+
+        span {
+          font-size: inherit !important;
+          line-height: 22px !important;
+        }
+      }
+
+      &-item {
+        margin-right: 8px;
+        user-select: none;
+      }
+
+      &-icon {
+        color: @text-color;
+
+        &-active {
+          color: @primary-color;
+        }
+      }
+
+      &-color {
+        height: 16px;
+        width: 16px;
+        cursor: pointer;
+        overflow: hidden;
+        border-bottom-width: 2px;
+        border-bottom-style: solid;
+
+        > i.anticon {
+          font-size: 17px;
+        }
+      }
+    }
+  }
+}

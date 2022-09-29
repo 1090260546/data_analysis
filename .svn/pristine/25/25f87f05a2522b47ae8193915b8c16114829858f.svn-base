@@ -1,0 +1,9 @@
+import { IProjectPermission } from 'containers/Projects/types'
+
+export const SidebarPermissions: Array<keyof IProjectPermission> = [
+  'vizPermission',
+  'widgetPermission',
+  'viewPermission',
+  'sourcePermission',
+  'schedulePermission'
+]

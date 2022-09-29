@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="davinci-server_0.3.1" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="davinci-parent_0.3.1" options="-parameters -bootclasspath &quot;$PROJECT_DIR$/../../Java/jdk1.8/jre/lib/rt.jar;$PROJECT_DIR$/../../Java/jdk1.8/jre/lib/jce.jar;$PROJECT_DIR$/../../Java/jdk1.8/jre/../lib/tools.jar&quot; -Xlint:all,-serial,-path -XDignore.symbol.file" />
+      <module name="davinci-server_0.3.1" options="-parameters -bootclasspath &quot;$PROJECT_DIR$/../../Java/jdk1.8/jre/lib/rt.jar;$PROJECT_DIR$/../../Java/jdk1.8/jre/lib/jce.jar;$PROJECT_DIR$/../../Java/jdk1.8/jre/../lib/tools.jar&quot; -Xlint:all,-serial,-path -XDignore.symbol.file" />
+    </option>
+  </component>
+</project>

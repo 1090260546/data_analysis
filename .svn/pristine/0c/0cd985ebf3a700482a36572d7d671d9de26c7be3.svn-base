@@ -1,0 +1,20 @@
+@import '~antd/lib/style/themes/default';
+
+:global {
+  .richtext {
+    &-image-element {
+      .react-resizable-handle-e {
+        right: -10px;
+      }
+
+      &-selected {
+        user-select: none;
+
+        img {
+          border: @border-width-base dashed @border-color-base;
+          box-sizing: content-box;
+        }
+      }
+    }
+  }
+}

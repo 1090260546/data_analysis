@@ -1,0 +1,180 @@
+import React, { useContext, useMemo, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import pick from 'lodash/pick'
+
+import {
+  makeSelectCurrentLayerIds,
+  makeSelectCurrentDisplayWidgets
+} from '../selectors'
+
+import {
+  LayerListContext,
+  LayerListContextValue,
+  LayerItem
+} from '../components/Layer'
+
+import ViewActions from '../../View/actions'
+import DisplayActions from '../actions'
+import { RenderType } from '../../Widget/components/Widget'
+import { IQueryConditions } from '../../Dashboard/types'
+import { getRequestParamsByWidgetConfig } from 'containers/Viz/util'
+import { makeSelectFormedViews } from '../../View/selectors'
+import {
+  makeSelectCurrentSlide,
+  makeSelectCurrentDisplay
+} from '../../Viz/selectors'
+
+import SlideLayer from './SlideLayer'
+import { ContainerContext } from '../components/Container'
+import { makeSelectCurrentProject } from '../../Projects/selectors'
+import { DEFAULT_SPLITER } from 'app/globalConstants'
+import { IWidgetFormed } from '../../Widget/types'
+import { DeltaPosition } from '../components/types'
+import { DragTriggerTypes } from '../constants'
+
+import { ILayerOperationInfo } from 'app/containers/Display/components/types'
+
+const SlideLayerList: React.FC = (props) => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const { id: projectId } = useSelector(makeSelectCurrentProject())
+  const { id: displayId } = useSelector(makeSelectCurrentDisplay())
+  const {
+    config: { slideParams }
+  } = useSelector(makeSelectCurrentSlide())
+  const currentLayerIds = useSelector(makeSelectCurrentLayerIds())
+
+  const currentDisplayWidgets = useSelector(makeSelectCurrentDisplayWidgets())
+  const formedViews = useSelector(makeSelectFormedViews())
+
+  const { scale } = useContext(ContainerContext)
+
+  const editWidget = useCallback(
+    (widgetId: number) => {
+      const editSign = [projectId, displayId].join(DEFAULT_SPLITER)
+      sessionStorage.setItem('editWidgetFromDisplay', editSign)
+      history.push(`/project/${projectId}/widget/${widgetId}`)
+    },
+    [projectId, displayId]
+  )
+
+  const onDrag = useCallback(
+    (
+      layerId,
+      deltaPosition: DeltaPosition,
+      eventTrigger: DragTriggerTypes,
+      finish = false
+    ) => {
+      if (deltaPosition.deltaX === null && deltaPosition.deltaY === null) {
+        return
+      }
+      dispatch(
+        DisplayActions.dragLayer(
+          pick(slideParams, 'width', 'height'),
+          scale[0],
+          deltaPosition,
+          eventTrigger,
+          finish,
+          layerId
+        )
+      )
+    },
+    [slideParams, scale]
+  )
+
+  const onResize = useCallback(
+    (layerId, deltaSize, finish = false) => {
+      dispatch(
+        DisplayActions.resizeLayer(
+          pick(slideParams, 'width', 'height'),
+          scale[0],
+          layerId,
+          deltaSize,
+          finish
+        )
+      )
+    },
+    [slideParams, scale]
+  )
+
+  const onSelectionChange = useCallback((layerId, selected, exclusive) => {
+    dispatch(DisplayActions.selectLayer(layerId, selected, exclusive))
+  }, [])
+
+  const onEditLabelChange = useCallback((layerId: number, changedInfo: Partial<ILayerOperationInfo>) => {
+    dispatch(DisplayActions.changeLayerOperationInfo(layerId, changedInfo))
+  }, [])
+
+  const getWidgetViewModel = useCallback(
+    (viewId: number) => {
+      const viewModel = formedViews[viewId].model
+      return viewModel
+    },
+    [formedViews]
+  )
+
+  const getChartData = useCallback(
+    (
+      renderType: RenderType,
+      slideId: number,
+      layerId: number,
+      widget: IWidgetFormed,
+      prevQueryConditions: Partial<IQueryConditions>,
+      queryConditions?: Partial<IQueryConditions>
+    ) => {
+      const requestParams = getRequestParamsByWidgetConfig(
+        renderType,
+        widget.config,
+        prevQueryConditions,
+        queryConditions
+      )
+      dispatch(
+        ViewActions.loadViewDataFromVizItem(
+          renderType,
+          [slideId, layerId],
+          widget.viewId,
+          requestParams,
+          'display',
+          null
+        )
+      )
+    },
+    []
+  )
+
+  const layerListContextValue = useMemo<LayerListContextValue>(
+    () => ({
+      currentDisplayWidgets,
+      editWidget,
+      onDrag,
+      onSelectionChange,
+      onEditLabelChange,
+      onResize,
+      getWidgetViewModel,
+      getChartData
+    }),
+    [
+      currentDisplayWidgets,
+      editWidget,
+      onDrag,
+      onSelectionChange,
+      onEditLabelChange,
+      onResize,
+      getWidgetViewModel,
+      getChartData
+    ]
+  )
+
+  return (
+    <LayerListContext.Provider value={layerListContextValue}>
+      {currentLayerIds.map((id) => (
+        <SlideLayer key={id} id={id}>
+          <LayerItem />
+        </SlideLayer>
+      ))}
+    </LayerListContext.Provider>
+  )
+}
+
+export default React.memo(SlideLayerList)
